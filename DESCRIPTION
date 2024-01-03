@@ -1,15 +1,15 @@
 Package: jisshutools
 Title: Tools for Tyosa Jisshu
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person("Kentaro", "Kamada", , "kamaken0705@g.ecc.u-tokyo.ac.jp", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    broom,
     DescTools, 
     dplyr,
     forcats,

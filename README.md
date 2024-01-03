@@ -13,6 +13,8 @@
 ``` r
 if(!require(remotes)) install.packages("remotes")
 remotes::install_github("Kentaro-Kamada/jisshutools")
+
+library(jisshutools)
 ```
 
 ## Usage
@@ -20,8 +22,6 @@ remotes::install_github("Kentaro-Kamada/jisshutools")
 - 2変数のクロス表
 
 ``` r
-library(jisshutools)
-
 # Create a sample data
 data <-
   data.frame(
@@ -33,5 +33,23 @@ data <-
 result <- data |> jisshu_cross(x, y)
 
 # Save the cross table as an excel file
+result$save('hoge.xlsx')
+```
+
+- 線形回帰
+
+``` r
+# Create a sample data
+data <- tibble::tibble(
+  x1 = rnorm(100, mean = 0, sd = 1),
+  x2 = rnorm(100, mean = 0, sd = 1),
+  y = 3 + 0.3*x1 + 0.5*x2 + rnorm(100, mean = 0, sd = 0.1)
+)
+
+# Create a regression table
+model <- lm(y ~ x1 + x2, data = data)
+result <- jisshu_reg(model)
+
+# Save the regression table as an excel file
 result$save('hoge.xlsx')
 ```
