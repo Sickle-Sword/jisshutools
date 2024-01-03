@@ -4,6 +4,12 @@
     <loc>https://kentaro-kamada.github.io/jisshutools/404.html</loc>
   </url>
   <url>
+    <loc>https://kentaro-kamada.github.io/jisshutools/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://kentaro-kamada.github.io/jisshutools/LICENSE.html</loc>
+  </url>
+  <url>
     <loc>https://kentaro-kamada.github.io/jisshutools/authors.html</loc>
   </url>
   <url>
@@ -14,5 +20,8 @@
   </url>
   <url>
     <loc>https://kentaro-kamada.github.io/jisshutools/reference/jisshu_cross.html</loc>
+  </url>
+  <url>
+    <loc>https://kentaro-kamada.github.io/jisshutools/reference/jisshu_reg.html</loc>
   </url>
 </urlset>
