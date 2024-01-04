@@ -42,6 +42,7 @@ result$save('hoge.xlsx')
 # Create a sample data
 data <- tibble::tibble(
   x1 = rnorm(100, mean = 0, sd = 1),
+  x2 = rnorm(100, mean = 0, sd = 1),
   y = 0.2 + 0.3*x1 + 0.5*x2 + rnorm(100, mean = 0, sd = 0.1),
   y_bin = rbinom(100, 1, plogis(y))
 )
