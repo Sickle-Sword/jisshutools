@@ -4,7 +4,7 @@
 
 ## Overview
 
-調査実習で使える関数を作ってみました。とりあえずは一つですが、やる気があれば更新していきます。
+調査実習で使える関数を作ってみました。やる気があれば多項ロジットなどもつくります。
 
 ## Installation
 
@@ -36,20 +36,26 @@ result <- data |> jisshu_cross(x, y)
 result$save('hoge.xlsx')
 ```
 
-- 線形回帰
+- 線形回帰・2項ロジスティック回帰
 
 ``` r
 # Create a sample data
 data <- tibble::tibble(
   x1 = rnorm(100, mean = 0, sd = 1),
-  x2 = rnorm(100, mean = 0, sd = 1),
-  y = 3 + 0.3*x1 + 0.5*x2 + rnorm(100, mean = 0, sd = 0.1)
+  y = 0.2 + 0.3*x1 + 0.5*x2 + rnorm(100, mean = 0, sd = 0.1),
+  y_bin = rbinom(100, 1, plogis(y))
 )
 
 # Create a regression table
-model <- lm(y ~ x1 + x2, data = data)
-result <- jisshu_reg(model)
+# Linear regression
+model_lm <- lm(y ~ x1 + x2, data = data)
+result_lm <- jisshu_reg(model_lm)
+
+# Logistic regression
+model_glm <- glm(y_bin ~ x1 + x2, data = data, family = binomial(link = 'logit'))
+result_glm <- jisshu_reg(model_glm)
 
 # Save the regression table as an excel file
-result$save('hoge.xlsx')
+result_lm$save('hoge_lm.xlsx')
+result_glm$save('hoge_glm.xlsx')
 ```

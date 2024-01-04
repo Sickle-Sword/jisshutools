@@ -35,7 +35,7 @@
 #' @importFrom stringr str_glue str_c
 #' @importFrom tidyr pivot_wider replace_na
 #' @importFrom tibble enframe as_tibble
-#' @importFrom scales pvalue
+#' @importFrom scales number pvalue
 #' @importFrom DescTools CramerV
 #' @importFrom janitor tabyl adorn_totals adorn_percentages chisq.test
 #' @importFrom openxlsx2 wb_workbook wb_add_worksheet wb_add_data wb_dims wb_merge_cells wb_data
@@ -104,7 +104,7 @@ jisshu_cross <- function(.data, .x, .y) {
     # 度数を追加
     mutate(N = str_c('（', N, '）')) |>
     # formatting
-    mutate(across(where(is.numeric), \(x) sprintf(fmt = '%.1f', x*100)))
+    mutate(across(where(is.numeric), \(x) number(x*100, accuracy = 0.1)))
 
   # excelに書き出し
   .wb <-
