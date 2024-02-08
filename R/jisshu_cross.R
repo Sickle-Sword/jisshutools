@@ -49,20 +49,12 @@ jisshu_cross <- function(.data, .x, .y) {
   .y <- enquo(.y)
 
   .contents_.y <- pull(.data, !!.y)
-  if(any(class(.contents_.y) == 'factor')){
-    .contents_.y <-
-      fct_na_value_to_level(.contents_.y, level = 'NA_') |>
-      fct_drop() |>
-      fct_unique() |>
-      as.character()
-  } else {
-    .contents_.y <-
-      factor(.contents_.y) |>
-      fct_na_value_to_level(level = 'NA_') |>
-      fct_drop() |>
-      fct_unique() |>
-      as.character()
-  }
+  if(!inherits(.contents_.y, 'factor')) .contents_.y <- factor(.contents_.y)
+  .contents_.y <-
+    fct_na_value_to_level(.contents_.y, level = 'NA_') |>
+    fct_drop() |>
+    fct_unique() |>
+    as.character()
 
   # クロス表作成
   .tabyl <- tabyl(.data, !!.x, !!.y)
