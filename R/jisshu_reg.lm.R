@@ -54,7 +54,7 @@ jisshu_reg.lm <- function(object) {
 
   # 注を追加
   .wb$add_data(
-    x = '注：*: p<0.05、**: p<0.01、***: p<0.001。',
+    x = '注：+: p<0.1、*: p<0.05、**: p<0.01、***: p<0.001。',
     dims = wb_dims(from_row = 1 + nrow(.sheetdata) + 1)
   )
 
