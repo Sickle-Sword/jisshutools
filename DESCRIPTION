@@ -1,5 +1,5 @@
 Package: jisshutools
-Title: Tools for Tyosa Jisshu
+Title: Tools for Chosa Jisshu
 Version: 0.3.0
 Authors@R: 
     person("Kentaro", "Kamada", , "kamaken0705@g.ecc.u-tokyo.ac.jp", role = c("aut", "cre"))
@@ -7,7 +7,9 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
+URL: https://kentaro-kamada.github.io/jisshutools/, https://github.com/Kentaro-Kamada/jisshutools
+BugReports: https://github.com/Kentaro-Kamada/jisshutools/issues
 Imports: 
     broom,
     DescTools, 
@@ -20,4 +22,3 @@ Imports:
     stringr,
     tibble,
     tidyr
-URL: https://kentaro-kamada.github.io/jisshutools/

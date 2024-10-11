@@ -1,4 +1,9 @@
 url: https://kentaro-kamada.github.io/jisshutools/
 template:
   bootstrap: 5
+  bootswatch: yeti
+navbar:
+  structure:
+    left: [reference, articles]
+    right: [search, github]
 

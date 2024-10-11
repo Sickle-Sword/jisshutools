@@ -2,7 +2,7 @@
 % Please edit documentation in R/jisshu_cross.R
 \name{jisshu_cross}
 \alias{jisshu_cross}
-\title{2 way cross table for tyosa jisshu}
+\title{2 way cross table for chosa jisshu}
 \usage{
 jisshu_cross(.data, .x, .y)
 }
