@@ -6,7 +6,7 @@
 \alias{jisshu_reg.glm}
 \alias{jisshu_reg.lm}
 \alias{jisshu_reg.lmer}
-\title{regression table for tyosa jisshu}
+\title{Regression Table for Chosa Jisshu}
 \usage{
 jisshu_reg(object)
 

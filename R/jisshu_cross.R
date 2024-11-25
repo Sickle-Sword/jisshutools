@@ -1,4 +1,4 @@
-#' 2 way cross table for chosa jisshu
+#' Two Way Cross Table for Chosa Jisshu
 #'
 #' 調査実習用の2次元クロス表を作成する関数です。
 #'

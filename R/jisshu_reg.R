@@ -1,4 +1,4 @@
-#' regression table for tyosa jisshu
+#' Regression Table for Chosa Jisshu
 #'
 #' 調査実習用の回帰分析結果を作成する関数です。
 #'
