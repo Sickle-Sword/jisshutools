@@ -46,7 +46,7 @@
 <span><span class="co"># S3 method for class 'lm'</span></span>
 <span><span class="fu">jisshu_reg</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for class 'lmer'</span></span>
+<span><span class="co"># S3 method for class 'multinom'</span></span>
 <span><span class="fu">jisshu_reg</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -55,24 +55,45 @@
 
 
 <dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
-<dd><p>an object for which a summary is desired. For example, a model object, such as those returned by <code>lm</code> and <code>glm</code>.</p></dd>
+<dd><p>an object for which a summary is desired. For example, a model object, such as those returned by <code>lm</code>, <code>glm</code>, and <code>multinom</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>lm</code>や<code>glm</code>の結果から、執筆要項に沿ったエクセルの表が作成できます。</p>
+    <p><code>lm</code>や<code>glm</code>、<code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom</a></code>の結果から、執筆要項に沿ったエクセルの表が作成できます。</p>
 <p>エクセルへの保存はexampleを参照してください。</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a sample data</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  y <span class="op">=</span> <span class="fl">0.2</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span><span class="va">x1</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span><span class="va">x2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  y_bin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Logistic.html" class="external-link">plogis</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  y_bin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Logistic.html" class="external-link">plogis</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  y_multinom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">y</span>,</span></span>
+<span class="r-in"><span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">y</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Q1'</span>, <span class="st">'Q2'</span>, <span class="st">'Q3'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    include.lowest <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          x1     x2       y y_bin y_multinom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> -<span style="color: #BB0000;">1.40</span>    -<span style="color: #BB0000;">0.387</span> -<span style="color: #BB0000;">0.457</span>      0 Q1        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  0.255   -<span style="color: #BB0000;">0.785</span>  0.019<span style="text-decoration: underline;">9</span>     0 Q2        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> -<span style="color: #BB0000;">2.44</span>    -<span style="color: #BB0000;">1.06</span>  -<span style="color: #BB0000;">1.07</span>       0 Q1        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">57</span> -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.227</span>      1 Q1        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  0.622   -<span style="color: #BB0000;">1.76</span>  -<span style="color: #BB0000;">0.736</span>      1 Q1        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  1.15    -<span style="color: #BB0000;">0.691</span>  0.206      0 Q2        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000;">1.82</span>    -<span style="color: #BB0000;">0.559</span> -<span style="color: #BB0000;">0.736</span>      1 Q1        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> -<span style="color: #BB0000;">0.247</span>   -<span style="color: #BB0000;">0.537</span> -<span style="color: #BB0000;">0.206</span>      0 Q2        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">0.244</span>    0.227  0.033<span style="text-decoration: underline;">9</span>     0 Q2        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> -<span style="color: #BB0000;">0.283</span>    0.978  0.869      0 Q3        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a regression table</span></span></span>
 <span class="r-in"><span><span class="co"># Linear regression</span></span></span>
@@ -101,10 +122,23 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> モデルχ2乗値       3.696      <span style="color: #949494;">""</span>        <span style="color: #BB0000;">NA</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> N                  100         <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Multinomial logistic regression</span></span></span>
+<span class="r-in"><span><span class="va">model_multinom</span> <span class="op">&lt;-</span> <span class="fu">nnet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">multinom</a></span><span class="op">(</span><span class="va">y_multinom</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>, data <span class="op">=</span> <span class="va">data</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result_multinom</span> <span class="op">&lt;-</span> <span class="fu">jisshu_reg</span><span class="op">(</span><span class="va">model_multinom</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in model.frame.default(formula = y_multinom ~ 1, data = data):</span> 'data' must be a data.frame, environment, or list</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Glance the regression table</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span>  <span class="va">result_lm</span><span class="op">$</span><span class="fu">open</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">result_glm</span><span class="op">$</span><span class="fu">open</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">result_multinom</span><span class="op">$</span><span class="fu">open</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Save the regression table as an excel file</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">result_lm</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">'hoge_lm.xlsx'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">result_glm</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">'hoge_glm.xlsx'</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">result_lm</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">'hoge_lm.xlsx'</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">result_glm</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">'hoge_glm.xlsx'</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">result_multinom</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">'hoge_multinom.xlsx'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
