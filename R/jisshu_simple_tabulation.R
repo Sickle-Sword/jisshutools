@@ -4,8 +4,8 @@
 #'
 #' @param data a `tibble` or `data.frame`
 #' @param path a file path to save the excel file
-#' @param grade specify the grade (year) variable. It must be a factor variable contains '1年', '2年', '3年'.
-#' @param gender specify the gender variable. It must be a factor variable contains '男', '女'.
+#' @param grade specify the grade (i.e. school year) variable. It must be a factor variable with the levels '1年', '2年', '3年'.
+#' @param gender specify the gender variable. It must be a factor variable with the levels '男', '女'.
 #' @param include variables to include in the table. Specify the variables in tidy-select style like `dplyr::select()`. Default is `everything()`, e.g. all variables.
 #' @param cont_var continuous variables to compute mean instead of frequency. Specify the variables in tidy-select style like `dplyr::select()`. Default is `NULL`.
 #'
