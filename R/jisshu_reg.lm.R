@@ -6,7 +6,7 @@
 #' @importFrom tibble tibble
 #' @importFrom openxlsx2 wb_workbook wb_add_worksheet wb_add_data wb_dims wb_data
 #'
-#' @export
+#' @exportS3Method jisshutools::jisshu_reg
 #'
 
 jisshu_reg.lm <- function(object) {

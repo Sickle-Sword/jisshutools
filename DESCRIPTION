@@ -10,7 +10,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://kentaro-kamada.github.io/jisshutools/, https://github.com/Kentaro-Kamada/jisshutools
 BugReports: https://github.com/Kentaro-Kamada/jisshutools/issues
-Suggests: haven
+Suggests: 
+    haven,
+    nnet
 Imports:
     broom,
     DescTools, 

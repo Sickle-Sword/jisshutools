@@ -18,9 +18,9 @@ jisshu_simple_tabulation(
 
 \item{path}{a file path to save the excel file}
 
-\item{grade}{specify the grade (year) variable. It must be a factor variable contains '1年', '2年', '3年'.}
+\item{grade}{specify the grade (i.e. school year) variable. It must be a factor variable with the levels '1年', '2年', '3年'.}
 
-\item{gender}{specify the gender variable. It must be a factor variable contains '男', '女'.}
+\item{gender}{specify the gender variable. It must be a factor variable with the levels '男', '女'.}
 
 \item{include}{variables to include in the table. Specify the variables in tidy-select style like \code{dplyr::select()}. Default is \code{everything()}, e.g. all variables.}
 

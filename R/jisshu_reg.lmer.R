@@ -1,5 +1,5 @@
 #'
-#' @rdname jisshu_reg
+#'
 #' @import dplyr
 #' @importFrom broom tidy glance
 #' @importFrom scales number
