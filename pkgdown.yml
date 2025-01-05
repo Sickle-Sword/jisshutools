@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-01-04T14:08Z
+last_built: 2025-01-05T14:42Z
 urls:
   reference: https://kentaro-kamada.github.io/jisshutools/reference
   article: https://kentaro-kamada.github.io/jisshutools/articles
