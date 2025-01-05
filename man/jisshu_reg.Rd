@@ -28,7 +28,7 @@ jisshu_reg(object)
 エクセルへの保存はexampleを参照してください。
 }
 \examples{
-data <- tibble::tibble(
+sample_data <- tibble::tibble(
   x1 = rnorm(100, mean = 0, sd = 1),
   x2 = rnorm(100, mean = 0, sd = 1),
   y = 0.2 + 0.3*x1 + 0.5*x2 + rnorm(100, mean = 0, sd = 0.1),
@@ -41,20 +41,22 @@ data <- tibble::tibble(
   )
 )
 
-data
+sample_data
 
 # Create a regression table
 # Linear regression
-model_lm <- lm(y ~ x1 + x2, data = data)
+model_lm <- lm(y ~ x1 + x2, data = sample_data)
 result_lm <- jisshu_reg(model_lm)
 
 # Logistic regression
-model_glm <- glm(y_bin ~ x1 + x2, data = data, family = binomial(link = 'logit'))
+model_glm <- glm(y_bin ~ x1 + x2, data = sample_data, family = binomial(link = 'logit'))
 result_glm <- jisshu_reg(model_glm)
 
 # Multinomial logistic regression
-model_multinom <- nnet::multinom(y_multinom ~ x1 + x2, data = data, trace = FALSE)
+model_multinom <-
+  nnet::multinom(y_multinom ~ x1 + x2, data = sample_data, model = TRUE, trace = FALSE)
 result_multinom <- jisshu_reg(model_multinom)
+
 
 # Glance the regression table
 \dontrun{

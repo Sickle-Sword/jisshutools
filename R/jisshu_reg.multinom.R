@@ -5,6 +5,8 @@
 #' @importFrom scales number
 #' @importFrom tibble tibble
 #' @importFrom rlang f_lhs as_name
+#' @importFrom stringr str_glue
+#' @importFrom purrr pluck_exists
 #' @importFrom openxlsx2 wb_workbook wb_add_worksheet wb_add_data wb_dims wb_data
 #'
 #' @exportS3Method jisshutools::jisshu_reg
@@ -13,13 +15,16 @@
 
 jisshu_reg.multinom <- function(object) {
 
+  # nnet::multinomで`model = TRUE`になっているかチェック
+  if(!pluck_exists(object, 'model')) stop('nnet::multinom()で`model = TRUE`を設定してください。')
+
   # 従属変数の変数名と参照カテゴリ
-  y_name <- object$terms |> f_lhs() |> as_name()
+  y_name <- as_name(f_lhs(object$terms))
   y_ref <- object$lab[1]
 
   # nullモデルを推定し、統計量を算出
   nullmodel <-
-    update(object, ~1, trace = FALSE) |>
+    update(object, ~1, data = object$model, trace = FALSE) |>
     glance() |>
     rename_with(\(x) paste0(x, '_null'))
 

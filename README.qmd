@@ -79,7 +79,7 @@ model_glm <- glm(y_bin ~ x1 + x2, data = data, family = binomial(link = 'logit')
 result_glm <- jisshu_reg(model_glm)
 
 # Multinomial logistic regression
-model_multinom <- nnet::multinom(y_multinom ~ x1 + x2, data = data, trace = FALSE)
+model_multinom <- nnet::multinom(y_multinom ~ x1 + x2, data = data, model = TRUE)
 result_multinom <- jisshu_reg(model_multinom)
 
 # Glance the regression table

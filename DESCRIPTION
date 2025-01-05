@@ -1,6 +1,6 @@
 Package: jisshutools
 Title: Tools for Chosa Jisshu
-Version: 0.4.0
+Version: 0.5.1
 Authors@R: 
     person("Kentaro", "Kamada", , "kamaken0705@g.ecc.u-tokyo.ac.jp", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
@@ -20,11 +20,14 @@ Imports:
     forcats,
     janitor,
     openxlsx2,
+    purrr,
+    readr,
     rlang,
     scales,
     stringr,
     tibble,
     tidyr,
+    tidyselect,
     kamaken
 Remotes:
     Kentaro-Kamada/kamaken@v0.3.0
